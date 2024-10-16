@@ -1,16 +1,26 @@
 package application;
 
 import chess.ChessPiece;
+import utils.NumToLetter;
+
+import static utils.NumToLetter.numToLetter;
 
 public class UI {
 
     public static void printBoard(ChessPiece[][] pieces){
-        for (int i = 0; i<pieces.length; i++){
-            for (int j = 0; j<pieces.length; j++){
-                printPiece(pieces[i][j]);
+        for (int i = 0; i < pieces.length; i++){
+            System.out.print((8 - i) + " ");
+            for (int j = 0; j < pieces.length; j++){
+                printPiece(pieces[(i)][j]);
             }
             System.out.print("\n");
         }
+        System.out.print("  ");
+        for (int i = 0; i < pieces.length; i++){
+            numToLetter(i);
+            System.out.print(" ");
+        }
+        System.out.println();
     }
     private static void printPiece(ChessPiece piece){
         if (piece == null){

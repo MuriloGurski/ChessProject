@@ -11,6 +11,11 @@ public class Board {
         pieces = new Piece[rows][collumns];
     }
 
+    public void placePiece(Piece piece, Position position){
+        this.pieces[position.getRow()][position.getCollumn()] = piece;
+        piece.position = position;
+    }
+
     public int getRows() {
         return rows;
     }

@@ -1,6 +1,7 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Position;
 
 public class ChessMatch {
 
@@ -13,6 +14,7 @@ public class ChessMatch {
 
     public ChessMatch() {
         board = new Board(8,8);
+        InitialSetup();
     }
 
     public ChessPiece[][] getPieces(){
@@ -24,6 +26,12 @@ public class ChessMatch {
             }
         }
         return mat;
+    }
+
+    public void InitialSetup(){
+        board.placePiece(new Rook(board,Color.WHITE), new Position(0,0));
+        board.placePiece(new Knight(board,Color.WHITE), new Position(0,1));
+        board.placePiece(new King(board,Color.WHITE), new Position(0,3));
     }
 /*
     public boolean[][] possibleMoves(ChessPosition sourcePosition){
