@@ -4,32 +4,34 @@ import java.util.Map;
 
 public class NumToLetter {
 
-    public static void numToLetter(int num){
+    public static String numToLetter(int num){
+        String resp ="";
         switch (num){
             case 0:
-                System.out.print("a");
+                resp = "a";
                 break;
             case 1:
-                System.out.print("b");
+                resp = "b";
                 break;
             case 2:
-                System.out.print("c");
+                resp = "c";
                 break;
             case 3:
-                System.out.print("d");
+                resp = "d";
                 break;
             case 4:
-                System.out.print("e");
+                resp = "e";
                 break;
             case 5:
-                System.out.print("f");
+                resp = "f";
                 break;
             case 6:
-                System.out.print("g");
+                resp = "g";
                 break;
             case 7:
-                System.out.print("h");
+                resp = "h";
                 break;
         }
+        return resp;
     }
 }

@@ -1,5 +1,7 @@
 package boardgame;
 
+import utils.NumToLetter;
+
 public class Position {
 
    private int row,collumn;
@@ -29,5 +31,10 @@ public class Position {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    @Override
+    public String toString(){
+       return (8 - row) + NumToLetter.numToLetter(collumn);
     }
 }
