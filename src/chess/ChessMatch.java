@@ -86,6 +86,12 @@ public class ChessMatch {
         return capturedPiece;
     }
 
+    public boolean[][] possibleMoves(ChessPosition sourcePosition){
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return board.getPiece(position).possibleMoves();
+    }
+
     public void validateSourcePosition(Position position){
         if (!board.thereIsAPiece(position)){
             throw new ChessException("No piece found in " + position);
