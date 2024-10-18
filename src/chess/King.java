@@ -5,8 +5,11 @@ import boardgame.Position;
 
 public class King extends ChessPiece{
 
-    public King(Board board, Color color) {
+    public ChessMatch match;
+
+    public King(Board board, Color color, ChessMatch match) {
         super(board, color);
+        this.match = match;
     }
 
     @Override
@@ -17,6 +20,11 @@ public class King extends ChessPiece{
     public boolean canMove(Position position){
         ChessPiece p = (ChessPiece) getBoard().getPiece(position);
         return  p == null || p.getColor() != getColor();
+    }
+
+    public boolean testRookCastling(Position position){
+        ChessPiece p = (ChessPiece) getBoard().getPiece(position);
+        return p instanceof Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
     }
 
     @Override
@@ -63,6 +71,27 @@ public class King extends ChessPiece{
         p.setValues(position.getRow() +1, position.getCollumn()+1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getCollumn()] = true;
+        }
+
+        //castling
+        if (getMoveCount() == 0 && !match.getCheck()){
+            Position posT1 = new Position(position.getRow(),position.getCollumn()+3);
+            if (testRookCastling(posT1)){
+                Position p1 = new Position(position.getRow(),position.getCollumn()+1);
+                Position p2 = new Position(position.getRow(),position.getCollumn()+2);
+                if(getBoard().getPiece(p1) == null && getBoard().getPiece(p2) == null){
+                    mat[position.getRow()][position.getCollumn()+2] = true;
+                }
+            }
+            Position posT2 = new Position(position.getRow(),position.getCollumn()-4);
+            if (testRookCastling(posT2)){
+                Position p1 = new Position(position.getRow(),position.getCollumn()-1);
+                Position p2 = new Position(position.getRow(),position.getCollumn()-2);
+                Position p3 = new Position(position.getRow(),position.getCollumn()-3);
+                if (getBoard().getPiece(p1) == null && getBoard().getPiece(p2) == null && getBoard().getPiece(p3) == null){
+                    mat[position.getRow()][position.getCollumn()-2] = true;
+                }
+            }
         }
 
         return mat;
