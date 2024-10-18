@@ -9,9 +9,9 @@ public abstract class ChessPiece extends Piece {
     private Color color;
     //private int moveCount;
 
-    //public getChessPosition(){
-
-    //}
+    public ChessPosition getChessPosition(){
+        return ChessPosition.fromPosition(position);
+    }
 
     public ChessPiece(Board board, Color color) {
         super(board);
