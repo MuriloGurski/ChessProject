@@ -24,41 +24,43 @@ public class Pawn extends ChessPiece{
         switch (this.getColor()){
             case WHITE -> {
                 p.setValues(position.getRow()-1,position.getCollumn());
-                for (int i = 0; i < 2; i++){
-                    if (getBoard().positionExists(p.getRow()-1,p.getCollumn()-1)){
-                        if (isThereOponentPiece(new Position(p.getRow()-1,p.getCollumn()-1))){
-                            mat[p.getRow()-1][p.getCollumn()-1] = true;
+                if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                    mat[p.getRow()][p.getCollumn()] = true;
+                    if (getMoveCount() == 0) {
+                        p.setValues(position.getRow() - 2, position.getCollumn());
+                        if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                            mat[p.getRow()][p.getCollumn()] = true;
                         }
                     }
-                    if (getBoard().positionExists(p.getRow()-1,p.getCollumn()+1)){
-                        if (isThereOponentPiece(new Position(p.getRow()-1,p.getCollumn()+1))){
-                            mat[p.getRow()-1][p.getCollumn()+1] = true;
-                        }
-                    }
-                    if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
-                        mat[p.getRow()][p.getCollumn()] = true;
-                        p.setRow(p.getRow()-1);
-                    }
+                }
+                p.setValues(position.getRow()-1,position.getCollumn()-1);
+                if (getBoard().positionExists(p) && isThereOponentPiece(p)){
+                    mat[p.getRow()][p.getCollumn()] = true;
+                }
+                p.setValues(position.getRow()-1,position.getCollumn()+1);
+                if (getBoard().positionExists(p) && isThereOponentPiece(p)){
+                    mat[p.getRow()][p.getCollumn()] = true;
                 }
                 break;
             }
             case BLACK -> {
                 p.setValues(position.getRow()+1,position.getCollumn());
-                for (int i = 0; i < 2; i++){
-                    if (getBoard().positionExists(p.getRow()+1,p.getCollumn()-1)){
-                        if (isThereOponentPiece(new Position(p.getRow()+1,p.getCollumn()-1))){
-                            mat[p.getRow()+1][p.getCollumn()-1] = true;
+                if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                    mat[p.getRow()][p.getCollumn()] = true;
+                    if (getMoveCount() == 0) {
+                        p.setValues(position.getRow() + 2, position.getCollumn());
+                        if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                            mat[p.getRow()][p.getCollumn()] = true;
                         }
                     }
-                    if (getBoard().positionExists(p.getRow()+1,p.getCollumn()+1)){
-                        if (isThereOponentPiece(new Position(p.getRow()+1,p.getCollumn()+1))){
-                            mat[p.getRow()+1][p.getCollumn()+1] = true;
-                        }
-                    }
-                    if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
-                        mat[p.getRow()][p.getCollumn()] = true;
-                        p.setRow(p.getRow()+1);
-                    }
+                }
+                p.setValues(position.getRow()+1,position.getCollumn()-1);
+                if (getBoard().positionExists(p) && isThereOponentPiece(p)){
+                    mat[p.getRow()][p.getCollumn()] = true;
+                }
+                p.setValues(position.getRow()+1,position.getCollumn()+1);
+                if (getBoard().positionExists(p) && isThereOponentPiece(p)){
+                    mat[p.getRow()][p.getCollumn()] = true;
                 }
                 break;
             }
